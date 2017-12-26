@@ -18,11 +18,17 @@ pip install -e .
 
 ## usage
 
-In order to run the application you need to export an environment variable that tells Flask where to find the application instance. Make sure to be inside the project directory and run the following
+export an environment variable that tells Flask where to find the application instance. Make sure to be inside the project directory and run the following
 
 ```bash
 export FLASK_APP=flaskblog
 ```
+Initialize the database
+
+```bash
+flask initdb
+```
+
 Run the application
 
 ```bash
