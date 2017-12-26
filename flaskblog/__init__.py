@@ -9,3 +9,6 @@ app.config.from_envvar('CONFIG', silent=True) # override default config with fil
 
 # database
 import flaskblog.db_manager
+
+# views
+import flaskblog.views
