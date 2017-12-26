@@ -1,0 +1,4 @@
+graft flaskblog/templates
+graft flaskblog/static
+include flaskblog/schema.sql
+prune instance/

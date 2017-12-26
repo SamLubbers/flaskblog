@@ -111,4 +111,4 @@ ENV/
 .DS_Store
 
 # ignore content in instance folder
-instance/
+instance/*
