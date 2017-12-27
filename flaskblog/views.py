@@ -7,7 +7,6 @@ def blog_entries():
     db = get_db()
     cur = db.execute('select title, text from blogentries order by id desc')
     entries = cur.fetchall()
-    print(entries[0][1])
     return render_template('blog_entries.html', entries=entries)
 
 @app.route('/login', methods=['GET', 'POST'])
