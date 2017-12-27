@@ -3,16 +3,18 @@
 {% block title %}flaskblog entries{% endblock %}
 {% block content %}
     {% if entries %}
-        <ul>
         {% for blog in entries %}
-            <li>
-                <h3>{{blog.title}}</h3>
-                <p> {{blog.text}}</p>
-            </li>
-
+            <div class="row">
+                <div class="col-md-8 offset-md-2 col-12">
+                    <h3 class="topspace"><strong>{{blog.title}}</strong></h3>
+                    {% for paragraph in blog.text.split('\n')%}
+                        <p class="blog-text"> {{paragraph|safe}}</p>
+                    {%endfor%}
+                </div>
+            </div>
+            <hr width="80%">
         {% endfor %}
-        </ul>
     {% else %}
-        <p>no entries to show</p>
+        <p class="center">no entries to show</p>
     {% endif %}
 {% endblock %}

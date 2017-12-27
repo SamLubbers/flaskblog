@@ -1,9 +1,10 @@
 #navtitle{
     font-size: 30px;
 }
-.artistic{
+.blog-text{
     font-family: 'Alegreya', serif;
     color:#222529;
+    font-size:23px;
 }
 .navbar-login{
     font-size: 20px;
@@ -29,7 +30,7 @@
 .center{
     text-align:center;
 }
-.alert{
+.topspace{
     margin-top:20px;
 }
 .title-margin{
@@ -37,5 +38,5 @@
     margin-bottom:3%;
 }
 .blog-title{
-    font-size:20px;
+    font-size:27px;
 }
