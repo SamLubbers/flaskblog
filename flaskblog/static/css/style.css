@@ -3,6 +3,7 @@
 }
 .artistic{
     font-family: 'Alegreya', serif;
+    color:#222529;
 }
 .navbar-login{
     font-size: 20px;
@@ -30,4 +31,11 @@
 }
 .alert{
     margin-top:20px;
+}
+.title-margin{
+    margin-top:-5%;
+    margin-bottom:3%;
+}
+.blog-title{
+    font-size:20px;
 }

@@ -2,15 +2,24 @@
 
 {% block title %}flaskblog login{% endblock %}
 {% block content %}
-    {% if session.logged_in%}
-    <h1>share a new blog</h1>
-    <form method="post">
-        <input type="text" name="title" placeholder="title">
-        <input type="text" name="text" placeholder="blog">
-        <br>
-        <input type="submit" value="post">
-    </form>
-    {% else %}
-    <p class="center">You must <a href="{{url_for('login')}}">log in </a> to post a blog </p>
-    {% endif %}
+    <div class="row">
+        <div class="col-md-8 offset-md-2 col-12">
+            {% if session.logged_in%}
+            <div class="jumbotron jumbominimal">
+                <h1 class="artistic title-margin">share a new blog</h1>
+                <form method="post">
+                    <div class="form-group">
+                        <input class="form-control artistic blog-title" type="text" name="title" placeholder="title">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control artistic" name="text" placeholder="blog" rows="10"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </form>
+            </div>
+            {% else %}
+            <p class="center">You must <a href="{{url_for('login')}}">log in </a> to post a blog </p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
