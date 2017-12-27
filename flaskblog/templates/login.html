@@ -1,18 +1,32 @@
-{% extends "base.html" %}
+{% extends "superbase.html" %}
 
 {% block title %}flaskblog login{% endblock %}
 {% block content %}
-    {% if session.logged_in%}
-    <p>you are already logged in</p>
-    {% else %}
-    <form method="post">
-        <p>username</p>
-        <input type="text" name="username">
-        <p>password</p>
-        <input type="text" name="password">
-        <br>
-        <input type="submit" value="login">
-    </form>
-    {% if error %}<p><strong>error: </strong>{{error}}</p>{% endif %}
-    {% endif %}
+    <div class="row">
+        <div class="col-md-8 offset-md-2 col-12">
+
+            {% if session.logged_in%}
+            <p class="center">you are already logged in</p>
+            {% else %}
+                <div class="jumbotron jumbominimal">
+                    <form method="post">
+                          <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                          </div>
+                          <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                          </div>
+                        <button type="submit" class="btn btn-primary">Log in</button>
+                    </form>
+                    {% if error %}
+                    <div class="alert alert-danger topspace" role="alert">
+                        {{error}}
+                    </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

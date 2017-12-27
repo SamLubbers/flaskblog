@@ -1,6 +1,42 @@
-body{
-	font-family: serif;
+#navtitle{
+    font-size: 30px;
 }
-.artistic{
+.blog-text{
     font-family: 'Alegreya', serif;
+    color:#222529;
+    font-size:23px;
+}
+.navbar-login{
+    font-size: 20px;
+    color:white;
+    margin: 0px 15px;
+    text-decoration: none;
+}
+.navbar-login:hover{
+    text-decoration: none;
+    color: white;
+}
+.jumbominimal{
+    border-style:solid;
+    border-width:1px;
+    border-color:#CED4DA;
+    background-color:white;
+}
+
+.top-container{
+    margin-top:50px;
+}
+
+.center{
+    text-align:center;
+}
+.topspace{
+    margin-top:20px;
+}
+.title-margin{
+    margin-top:-5%;
+    margin-bottom:3%;
+}
+.blog-title{
+    font-size:27px;
 }
