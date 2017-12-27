@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}flaskblog entries{% endblock %}
+{% block content %}
+    {% if entries %}
+        <ul>
+        {% for blog in entries %}
+            <li>
+                <h3>{{blog.title}}</h3>
+                <p> {{blog.text}}</p>
+            </li>
+
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>no entries to show</p>
+    {% endif %}
+{% endblock %}

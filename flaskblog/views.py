@@ -4,4 +4,7 @@ from flask import render_template
 
 @app.route('/')
 def index():
-    return render_template('base.html')
+    db = get_db()
+    cur = db.execute('select title, text from blogentries order by id desc')
+    entries = cur.fetchall()
+    return render_template('blog_entries.html', entries=entries)
