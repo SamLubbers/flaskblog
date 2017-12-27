@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}flaskblog login{% endblock %}
+{% block content %}
+    {% if session.logged_in%}
+    <h1>share a new blog</h1>
+    <form method="post">
+        <input type="text" name="title" placeholder="title">
+        <input type="text" name="text" placeholder="blog">
+        <br>
+        <input type="submit" value="post">
+    </form>
+    {% else %}
+    <p>You must <a href="{{url_for('login')}}">log in </a> to post a blog </p>
+    {% endif %}
+{% endblock %}
