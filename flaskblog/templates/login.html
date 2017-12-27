@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}flaskblog login{% endblock %}
+{% block content %}
+    {% if session.logged_in%}
+    <p>you are already logged in</p>
+    {% else %}
+    <form method="post">
+        <p>username</p>
+        <input type="text" name="username">
+        <p>password</p>
+        <input type="text" name="password">
+        <br>
+        <input type="submit" value="login">
+    </form>
+    {% if error %}<p><strong>error: </strong>{{error}}</p>{% endif %}
+    {% endif %}
+{% endblock %}
