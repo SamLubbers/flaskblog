@@ -1,6 +1,16 @@
-body{
-	font-family: serif;
+#navtitle{
+    font-size: 30px;
 }
 .artistic{
     font-family: 'Alegreya', serif;
+}
+.navbar-login{
+    font-size: 20px;
+    color:white;
+    margin: 0px 15px;
+    text-decoration: none;
+}
+.navbar-login:hover{
+    text-decoration: none;
+    color: white;
 }

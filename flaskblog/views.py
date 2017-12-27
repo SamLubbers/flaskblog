@@ -28,7 +28,7 @@ def logout():
     return redirect(url_for('blog_entries'))
 
 @app.route('/new', methods=['GET', 'POST'])
-def new_blog_entry():
+def new_blog():
     if request.method == 'POST':
         blog_title = request.form.get('title')
         blog_text = request.form.get('text')
