@@ -19,5 +19,10 @@ def login():
             error = 'invalid password'
         else:
             session['logged_in'] = True
-            redirect(url_for('blog_entries'))
+            return redirect(url_for('blog_entries'))
     return render_template('login.html', error=error)
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    return redirect(url_for('blog_entries'))
