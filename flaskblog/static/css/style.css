@@ -14,3 +14,20 @@
     text-decoration: none;
     color: white;
 }
+.jumbominimal{
+    border-style:solid;
+    border-width:1px;
+    border-color:#CED4DA;
+    background-color:white;
+}
+
+.top-container{
+    margin-top:50px;
+}
+
+.center{
+    text-align:center;
+}
+.alert{
+    margin-top:20px;
+}
