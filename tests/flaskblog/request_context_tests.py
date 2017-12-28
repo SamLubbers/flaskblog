@@ -3,6 +3,8 @@ from flaskblog import app
 from flaskblog.db_manager import get_db
 from time import time
 
+# TODO report on all failed tests, not only first failure
+
 # global test parameters
 test_count = 0
 tests_duration = 0.0
@@ -29,13 +31,14 @@ def time_function(fun):
 @context_test
 def test_routes():
     with app.test_request_context('/'):
-        assert request.path != '/'
+        assert request.path == '/'
 
 @context_test
 def test_db():
     with app.test_request_context('/'):
-        get_db()
-        assert str(type(g.db)) == '<class \'sqlite3.Connection\'>'
+        get_db() # link db connection to g_db object
+        g_db = getattr(g, 'db', None)
+        assert str(type(g_db)) == '<class \'sqlite3.Connection\'>'
 
 @time_function
 def all_tests():
@@ -45,7 +48,7 @@ def all_tests():
 if __name__ == '__main__':
     try:
         all_tests()
-    except AssertionError as err:
+    except Exception as err:
         print('context test error occurred')
         print('-' * 70)
         raise err
