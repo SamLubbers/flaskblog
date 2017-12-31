@@ -46,5 +46,16 @@ class FlaskblogTestCase(unittest.TestCase):
         res = self.login('admin', 'defaul')
         assert b'invalid password' in res.data
 
+    def test_new_post(self):
+        self.login('admin', 'default')
+        res = self.app.post('/new', data=dict(
+                                    title='<Hello>',
+                                    text = '<strong>HTML</strong> allowed here'),
+                            follow_redirects=True
+        )
+        assert b'no entries to show' not in res.data
+        assert b'&lt;Hello&gt;' in res.data
+        assert b'<strong>HTML</strong> allowed here' in res.data
+
 if __name__ == '__main__':
     unittest.main()
