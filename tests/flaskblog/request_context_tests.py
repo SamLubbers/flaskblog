@@ -35,8 +35,8 @@ def test_routes():
 
 @context_test
 def test_db():
-    with app.test_request_context('/'):
-        get_db() # link db connection to g_db object
+    with app.test_client() as client:
+        client.get('/')
         g_db = getattr(g, 'db', None)
         assert str(type(g_db)) == '<class \'sqlite3.Connection\'>'
 
