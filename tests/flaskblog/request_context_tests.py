@@ -40,10 +40,21 @@ def test_db():
         g_db = getattr(g, 'db', None)
         assert str(type(g_db)) == '<class \'sqlite3.Connection\'>'
 
+@context_test
+def test_session():
+    with app.test_client() as client:
+        with client.session_transaction() as sess:
+            sess['logged_in'] = True
+
+        res = client.get('/')
+        assert b'log out' in res.data
+        assert b'New blog' in res.data
+
 @time_function
 def all_tests():
     test_routes()
     test_db()
+    test_session()
 
 if __name__ == '__main__':
     try:
