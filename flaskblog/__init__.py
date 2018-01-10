@@ -12,3 +12,6 @@ import flaskblog.db_manager
 
 # views
 import flaskblog.views
+
+# error handler views
+import flaskblog.error_handlers
