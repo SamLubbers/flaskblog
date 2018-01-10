@@ -24,21 +24,15 @@ def get_db():
         g.db = connect_db()
     return g.db
 
-
+@app.before_first_request
 def init_db():
-    """initializes database with tables defined in schema.sql"""
-    db = get_db()
-    with app.open_resource('schema.sql', mode='r') as f:
-        db.cursor().executescript(f.read())
-    db.commit()
-
-
-@app.cli.command('initdb')
-def init_db_command():
-    """command to initialize database"""
-    init_db()
-    print('database initialized')
-
+    """initializes database with tables defined in schema.sql if the database does not exist yet"""
+    if not os.path.exists(app.config['DATABASE']):
+        db = get_db()
+        with app.open_resource('schema.sql', mode='r') as f:
+            db.cursor().executescript(f.read())
+        db.commit()
+        print('new db initialised')
 
 @app.teardown_appcontext
 def close_db(error):
