@@ -1,5 +1,17 @@
 # flaskblog
-personal blog developed with Flask and SQlite3. Learned from the [official flask docummentation tutorial](http://flask.pocoo.org/docs/0.12/tutorial/)
+personal blog developed with Flask and PostgreSQL.
+
+## prerequisites
+
+Python 3.6
+
+PostgreSQL. If you are on MacOS you can install it with [Homebrew](https://brew.sh/)
+
+
+´´´bash
+brew update
+brew install postgresql
+´´´ 
 
 ## installation
 
@@ -16,7 +28,7 @@ cd flaskblog
 pip install -e .
 ```
 
-## usage
+## Running
 
 Run the application (development mode, debug on by default)
 
