@@ -40,3 +40,15 @@
 .blog-title{
     font-size:22px;
 }
+
+.blog-container:hover{
+    cursor: pointer;
+}
+
+.blog-container:hover .blog-title{
+    color: #007BFF;
+}
+
+.small{
+    color: #CCC;
+}

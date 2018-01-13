@@ -37,3 +37,8 @@ def new_blog():
             db.session.commit()
             return redirect(url_for('blog_entries'))
     return render_template('new_blog_entry.html')
+
+@app.route('/blog/<int:blog_id>')
+def blog(blog_id):
+    blog = Blog.query.filter_by(id=blog_id).one()
+    return render_template('blog.html',blog=blog)
