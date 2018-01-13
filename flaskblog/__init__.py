@@ -1,16 +1,24 @@
 from flask import Flask
 from config import load_config
-from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
 
-# app configuration
-config = load_config()
-app.config.from_object(config)
+    # app configuration
+    config = load_config()
+    app.config.from_object(config)
 
-# database
-db = SQLAlchemy(app)
-import flaskblog.models
+    # register components
+    register_db(app)
+
+    return app
+
+def register_db(app):
+    """Register models"""
+    from .models import db
+    db.init_app(app=app)
+
+
 
 # views
 import flaskblog.views
