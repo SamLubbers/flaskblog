@@ -1,5 +1,5 @@
 # flaskblog
-personal blog developed with Flask and PostgreSQL.
+personal blog developed with Flask and SQLAlchemy.
 
 ## prerequisites
 
