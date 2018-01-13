@@ -17,3 +17,6 @@ import flaskblog.views
 
 # error handler views
 import flaskblog.error_handlers
+
+# template filters
+import flaskblog.filters

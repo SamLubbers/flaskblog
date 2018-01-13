@@ -2,9 +2,9 @@
     font-size: 30px;
 }
 .blog-text{
-    font-family: 'Alegreya', serif;
+    font-family: sans-serif;
     color:#222529;
-    font-size:23px;
+    font-size:20px;
 }
 .navbar-login{
     font-size: 20px;
@@ -38,5 +38,5 @@
     margin-bottom:3%;
 }
 .blog-title{
-    font-size:27px;
+    font-size:22px;
 }

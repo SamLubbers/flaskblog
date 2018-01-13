@@ -5,6 +5,7 @@ from flask import render_template, request, session, redirect, url_for
 @app.route('/')
 def blog_entries():
     entries = Blog.query.order_by(Blog.id).all()
+
     return render_template('blog_entries.html', entries=entries)
 
 @app.route('/login', methods=['GET', 'POST'])

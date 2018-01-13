@@ -8,10 +8,10 @@ Python 3.6
 PostgreSQL. If you are on MacOS you can install it with [Homebrew](https://brew.sh/)
 
 
-```bash
+´´´bash
 brew update
 brew install postgresql
-``` 
+´´´ 
 
 ## installation
 
@@ -21,7 +21,7 @@ Clone or download repository onto local computer
 git clone https://github.com/SamLubbers/flaskblog.git
 ```
 
-install application with necessary dependecies (preferably in a virtual environment, to avoid conflicts with existing packages in your computer)
+install application with necessary dependecies (preferably in a virtualenv, to avoid conflicts with existing packages in your computer)
 
 ```bash
 cd flaskblog
@@ -29,19 +29,6 @@ pip install -e .
 ```
 
 ## Running
-
-Start postgresSQL. If you are on MacOS you can run
-
-```bash
-brew services start postgresql
-```
-
-Create database in postgreSQL
-
-```bash
-psql postgres
-create database "flaskblog";
-```
 
 Run the application (development mode, debug on by default)
 
