@@ -4,7 +4,7 @@ setup(
     name='flaskblog',
     version='0.0.1',
     packages=['flaskblog'],
-    description='personal blog developed with Flask and SQlite3',
+    description='personal blog_bp developed with Flask and SQlite3',
     include_package_data=True,
     install_requires=[
         'flask',

@@ -18,6 +18,12 @@ def register_db(app):
     from .models import db
     db.init_app(app=app)
 
+def register_views(app):
+    """Register vies"""
+    from .views import blog_bp, user_bp
+    app.register_blueprint(blog_bp)
+    app.register_blueprint(user_bp)
+
 
 
 # views

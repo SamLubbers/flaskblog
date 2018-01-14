@@ -48,7 +48,7 @@ def test_session():
 
         res = client.get('/')
         assert b'log out' in res.data
-        assert b'New blog' in res.data
+        assert b'New blog_bp' in res.data
 
 @time_function
 def all_tests():

@@ -34,7 +34,7 @@ class FlaskblogTestCase(unittest.TestCase):
         # correct login
         res = self.login('admin', 'default')
         assert b'log out' in res.data
-        assert b'New blog' in res.data
+        assert b'New blog_bp' in res.data
         # correct log out
         res = self.logout()
         assert b'log in' in res.data
