@@ -6,6 +6,9 @@ class Config(object):
     TESTING = False
     SECRET_KEY = "not so secret base key"
 
+    # Root path of project
+    PROJECT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
     # SQLAlchemy config
     SQLALCHEMY_DATABASE_URI = "postgresql://localhost/flaskblog"
     SQLALCHEMY_TRACK_MODIFICATIONS = False

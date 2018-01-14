@@ -2,7 +2,6 @@ from flask_script import Manager
 from flaskblog import create_app
 
 app = create_app()
-
 manager = Manager(app)
 
 @manager.command

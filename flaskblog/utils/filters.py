@@ -9,6 +9,7 @@ def trim(text):
         return text
     else:
         return text
+
 def format_date(date):
     date = date.strftime('%H:%M %m/%d/%Y')
     return date
