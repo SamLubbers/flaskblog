@@ -30,10 +30,8 @@ def register_views(app):
 def register_filters(app):
     """register jinja filters"""
     from .utils import filters
-    app.jinja_env.filters.update({
-        'trim': filters.trim
-        'format_date': filters.format_date
-    })
+    app.jinja_env.filters['trim'] = filters.trim
+    app.jinja_env.filters['format_date'] = filters.format_date
 
 def register_error_handlers(app):
     """error handling"""

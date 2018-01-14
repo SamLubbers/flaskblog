@@ -3,7 +3,7 @@ from flaskblog.models import db
 from flaskblog.models import Blog
 from flask import render_template, request, redirect, url_for
 
-blog_bp = Blueprint('blog_bp', __name__)
+blog_bp = Blueprint('blog_bp', __name__, url_prefix='/blog')
 
 @blog_bp.route('/')
 def blog_entries():
@@ -20,10 +20,10 @@ def new_blog():
             blog = Blog(title=blog_title,text=blog_text)
             db.session.add(blog)
             db.session.commit()
-            return redirect(url_for('blog_entries'))
+            return redirect(url_for('blog_bp.blog_entries'))
     return render_template('new_blog_entry.html')
 
-@blog_bp.route('/blog_bp/<int:blog_id>')
+@blog_bp.route('/<int:blog_id>')
 def blog(blog_id):
     blog = Blog.query.filter_by(id=blog_id).one()
     return render_template('blog_bp.html',blog=blog)
