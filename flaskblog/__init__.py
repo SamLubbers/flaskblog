@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from config import load_config
 
 def create_app():
@@ -24,6 +24,31 @@ def register_views(app):
     app.register_blueprint(blog_bp)
     app.register_blueprint(user_bp)
 
+def register_error_handlers(app):
+    """error handling"""
+    server_error_code = 500
+
+    @app.errorhandler(server_error_code)
+    def server_error(error):
+        return render_template('error.html', code=server_error_code), server_error_code
+
+    gone_code = 410
+
+    @app.errorhandler(gone_code)
+    def gone(error):
+        return render_template('error.html', code=gone_code), gone_code
+
+    not_found_code = 404
+
+    @app.errorhandler(not_found_code)
+    def not_found(error):
+        return render_template('error.html', code=not_found_code), not_found_code
+
+    forbidden_code = 403
+
+    @app.errorhandler(forbidden_code)
+    def forbidden(error):
+        return render_template('error.html', code=forbidden_code), forbidden_code
 
 
 # views
