@@ -10,6 +10,9 @@ def create_app():
 
     # register components
     register_db(app)
+    register_views(app)
+    register_filters(app)
+    register_error_handlers(app)
 
     return app
 
@@ -23,6 +26,14 @@ def register_views(app):
     from .views import blog_bp, user_bp
     app.register_blueprint(blog_bp)
     app.register_blueprint(user_bp)
+
+def register_filters(app):
+    """register jinja filters"""
+    from .utils import filters
+    app.jinja_env.filters.update({
+        'trim': filters.trim
+        'format_date': filters.format_date
+    })
 
 def register_error_handlers(app):
     """error handling"""
@@ -49,13 +60,3 @@ def register_error_handlers(app):
     @app.errorhandler(forbidden_code)
     def forbidden(error):
         return render_template('error.html', code=forbidden_code), forbidden_code
-
-
-# views
-import flaskblog.views
-
-# error handler views
-import flaskblog.error_handlers
-
-# template filters
-import flaskblog.filters
