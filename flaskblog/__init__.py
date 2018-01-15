@@ -24,11 +24,14 @@ def register_db(app):
     db.init_app(app=app)
 
 def register_views(app):
-    """Register vies"""
-    from .views import index, blog_bp, user_bp
-    app.register_blueprint(blog_bp)
-    app.register_blueprint(user_bp)
-    app.register_blueprint(index)
+    """Register views"""
+    from . import views
+    from flask import Blueprint
+
+    for module in _import_submodules_from_package(views):
+        bp = getattr(module, 'bp')
+        if bp and isinstance(bp, Blueprint):
+            app.register_blueprint(bp)
 
 def register_jinja(app):
     """register jinja filters, templates..."""
@@ -41,9 +44,8 @@ def register_jinja(app):
             ])
         ])
 
-    # registering specific filters to templates
-    from .views import index
-    @index.context_processor
+    # registering filters to templates
+    @app.context_processor
     def filters():
         from .utils import filters
         return dict(trim=filters.trim, format_date=filters.format_date)
@@ -75,3 +77,15 @@ def register_error_handlers(app):
     @app.errorhandler(forbidden_code)
     def forbidden(error):
         return render_template(error_tempalte, code=forbidden_code), forbidden_code
+
+def _import_submodules_from_package(package):
+    from pkgutil import iter_modules
+    from importlib import import_module
+    modules = []
+
+    for importer, modname, ispkg in iter_modules(package.__path__,
+                                                 prefix=package.__name__ + "."):
+
+        modules.append(import_module(modname))
+
+    return modules

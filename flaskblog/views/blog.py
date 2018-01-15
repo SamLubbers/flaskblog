@@ -3,9 +3,9 @@ from flaskblog.models import db
 from flaskblog.models import Blog
 from flask import render_template, request, redirect, url_for
 
-blog_bp = Blueprint('blog_bp', __name__, url_prefix='/blog')
+bp = Blueprint('blog', __name__, url_prefix='/blog')
 
-@blog_bp.route('/new', methods=['GET', 'POST'])
+@bp.route('/new', methods=['GET', 'POST'])
 def new_blog():
     if request.method == 'POST':
         blog_title = request.form.get('title')
@@ -15,9 +15,9 @@ def new_blog():
             db.session.add(blog)
             db.session.commit()
             return redirect(url_for('index.blog_entries'))
-    return render_template('blog/new_blog_entry.html')
+    return render_template('blog/new_blog.html')
 
-@blog_bp.route('/<int:blog_id>')
-def blog(blog_id):
+@bp.route('/<int:blog_id>')
+def view_blog(blog_id):
     blog = Blog.query.filter_by(id=blog_id).one()
-    return render_template('blog/blog_bp.html',blog=blog)
+    return render_template('blog/view_blog.html',blog=blog)

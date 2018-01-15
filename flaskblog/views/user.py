@@ -3,7 +3,7 @@ from flask import request, render_template, session, redirect, url_for
 from flaskblog.models import db
 from flaskblog.models import Blog
 
-user_bp = Blueprint('user_bp', __name__, url_prefix='user')
+bp = Blueprint('user_bp', __name__, url_prefix='user')
 
 # @user_bp.route('/login', methods=['GET', 'POST'])
 # def login():
