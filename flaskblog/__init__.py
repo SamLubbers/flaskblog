@@ -12,7 +12,7 @@ def create_app():
 
     # register components
     register_db(app)
-    register_filters(app)
+    register_jinja(app)
     register_views(app)
     register_error_handlers(app)
 
@@ -30,8 +30,8 @@ def register_views(app):
     app.register_blueprint(user_bp)
     app.register_blueprint(index)
 
-def register_filters(app):
-    """register jinja filters"""
+def register_jinja(app):
+    """register jinja filters, templates..."""
 
     app.jinja_loader = jinja2.ChoiceLoader([
             app.jinja_loader,
@@ -41,9 +41,12 @@ def register_filters(app):
             ])
         ])
 
-    from .utils import filters
-    app.jinja_env.filters['trim'] = filters.trim
-    app.jinja_env.filters['format_date'] = filters.format_date
+    # registering specific filters to templates
+    from .views import index
+    @index.context_processor
+    def filters():
+        from .utils import filters
+        return dict(trim=filters.trim, format_date=filters.format_date)
 
 
 def register_error_handlers(app):

@@ -1,5 +1,6 @@
 import re
 
+
 def trim(text):
     """function used to trim blog_bp text in templates"""
     if len(text) > 160:
