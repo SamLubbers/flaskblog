@@ -14,7 +14,7 @@ def new_blog():
             blog = Blog(title=blog_title,text=blog_text)
             db.session.add(blog)
             db.session.commit()
-            return redirect(url_for('index.blog_entries'))
+            return redirect(url_for('index.index'))
     return render_template('blog/new_blog.html')
 
 @bp.route('/<int:blog_id>')

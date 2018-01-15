@@ -4,7 +4,6 @@
 {% block content %}
     <div class="row">
         <div class="col-md-8 offset-md-2 col-12">
-            {% if session.logged_in%}
             <div class="jumbotron jumbominimal">
                 <h2 class="title-margin">share a new blog</h2>
                 <form method="post">
@@ -17,9 +16,6 @@
                     <button type="submit" class="btn btn-primary">Post</button>
                 </form>
             </div>
-            {% else %}
-            <p class="center">You must <a href="{{url_for('login')}}">log in </a> to post a blog </p>
-            {% endif %}
         </div>
     </div>
 {% endblock %}

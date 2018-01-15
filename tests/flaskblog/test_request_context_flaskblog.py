@@ -1,8 +1,8 @@
 from flask import request, g
-from flaskblog import app
-from flaskblog.db_manager import get_db
+from flaskblog import create_app
 from time import time
 
+app = create_app()
 # TODO report on all failed tests, not only first failure
 
 # global test parameters
@@ -33,28 +33,10 @@ def test_routes():
     with app.test_request_context('/'):
         assert request.path == '/'
 
-@context_test
-def test_db():
-    with app.test_client() as client:
-        client.get('/')
-        g_db = getattr(g, 'db', None)
-        assert str(type(g_db)) == '<class \'sqlite3.Connection\'>'
-
-@context_test
-def test_session():
-    with app.test_client() as client:
-        with client.session_transaction() as sess:
-            sess['logged_in'] = True
-
-        res = client.get('/')
-        assert b'log out' in res.data
-        assert b'New blog_bp' in res.data
 
 @time_function
 def all_tests():
     test_routes()
-    test_db()
-    test_session()
 
 if __name__ == '__main__':
     try:
