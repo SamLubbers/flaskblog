@@ -4,11 +4,12 @@ import os
 import jinja2
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, instance_relative_config=True)
 
     # app configuration
     config = load_config()
     app.config.from_object(config)
+    app.config.from_envvar('CONFIG') # override default config with production config in instance folder
 
     # register components
     register_db(app)
