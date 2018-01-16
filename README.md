@@ -7,11 +7,11 @@ Python 3.6
 
 PostgreSQL. If you are on MacOS you can install it with [Homebrew](https://brew.sh/)
 
-
-´´´bash
+```bash
 brew update
 brew install postgresql
-´´´ 
+```
+
 
 ## installation
 
