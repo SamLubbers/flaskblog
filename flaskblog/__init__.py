@@ -9,7 +9,7 @@ def create_app():
     # app configuration
     config = load_config()
     app.config.from_object(config)
-    app.config.from_envvar('CONFIG') # override default config with production config in instance folder
+    app.config.from_envvar('CONFIG', silent=True) # override default config with production config in instance folder
 
     # register components
     register_db(app)

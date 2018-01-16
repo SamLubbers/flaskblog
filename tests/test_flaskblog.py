@@ -3,7 +3,7 @@ from flask import template_rendered, request
 from contextlib import contextmanager
 import flaskblog
 import unittest
-
+from blinker import signal
 
 @contextmanager
 def captured_templates(app):
@@ -47,3 +47,4 @@ class RoutesTestCase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
