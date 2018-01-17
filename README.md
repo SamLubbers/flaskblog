@@ -21,17 +21,42 @@ Clone or download repository onto local computer
 git clone https://github.com/SamLubbers/flaskblog.git
 ```
 
-install application with necessary dependecies (preferably in a virtualenv, to avoid conflicts with existing packages in your computer)
+install necessary requirements with pip (preferably in a virtualenv, to avoid conflicts with existing packages in your computer)
 
 ```bash
 cd flaskblog
-pip install -e .
+pip install -r requirements.txt
 ```
 
-## Running
+## running
 
-Run the application (development mode, debug on by default)
+### create database
+
+start postgres
 
 ```bash
-./run.sh
+brew services start postgresql
 ```
+create database
+
+```bash
+psql postgres
+postgres=# create database "flaskblog";
+```
+run migrations to create tables in the database
+
+```bash
+python manage.py db upgrade
+```
+## development
+
+### database migrations
+
+If you make changes to the database schema you can apply the changes to the database using `flask-migrate`
+
+```bash
+python manage.py db migrate
+python manage.py db upgrade
+```
+
+It is recommended to review the migrations file created at `migrations/versions` after running `db migrate` to make sure that the right migrations have been created and make any changes that are necessary. Once the migrations are in the correct state you can run `db upgrade` to apply the migrations to the databse. An example when this may be necessary is when you rename tables or columns, in which case flask-migrate will not notice the changes.

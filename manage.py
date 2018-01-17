@@ -15,4 +15,4 @@ def run():
     app.run()
 
 if __name__ == '__main__':
-    manager.run() # direct call to run so we can run and debug from PyCharm
+    manager.run()
