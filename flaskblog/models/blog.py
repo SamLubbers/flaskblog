@@ -8,10 +8,10 @@ class Blog(db.Model):
     text = db.Column(db.Text, nullable=False)
     pubdate = db.Column(db.DateTime, default=datetime.utcnow())
 
-    tags = db.relationship('tag', secondary=blog_tag, back_populates='blogs', lazy='dynamic')
+    tags = db.relationship('Tag', secondary=blog_tag, back_populates='blogs', lazy='dynamic')
 
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    author = db.relationship('user', back_populates='blogs', lazy='dynamic')
+    author = db.relationship('User', back_populates='blogs')
     def __repr__(self):
         return f"<Blog(title='{self.title}')>"
 
