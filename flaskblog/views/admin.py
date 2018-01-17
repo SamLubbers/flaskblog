@@ -13,7 +13,8 @@ class ListView(View):
 
     def dispatch_request(self):
         data = self.model.query.all()
-        return render_template('admin/list.html', model=self.model.__name__, data=data)
+        model_name = self.model.__name__.lower()
+        return render_template('admin/list.html', model=model_name, data=data)
 
 bp.add_url_rule('/blog', view_func=ListView.as_view('blog_admin', model=Blog))
 bp.add_url_rule('/user', view_func=ListView.as_view('user_admin', model=User))
