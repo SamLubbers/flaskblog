@@ -1,9 +1,8 @@
-""""""
-from flask import template_rendered, request
+from flask import template_rendered, request, url_for, current_app
 from contextlib import contextmanager
 import flaskblog
 import unittest
-from blinker import signal
+import logging
 
 @contextmanager
 def captured_templates(app):
@@ -19,6 +18,15 @@ def captured_templates(app):
     finally:
         template_rendered.disconnect(record, app)
 
+
+class AppTestCase(unittest.TestCase):
+    def setUp(self):
+        self.app = flaskblog.create_app()
+        self.app.testing = True
+
+    def test_current_app(self):
+        with self.app.app_context():
+            assert current_app == self.app
 
 class TempalatesTestCase(unittest.TestCase):
     def setUp(self):
