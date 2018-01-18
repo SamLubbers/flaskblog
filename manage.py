@@ -1,7 +1,7 @@
 from flask_script import Manager
 from flaskblog import create_app
-from flask_migrate import Migrate, MigrateCommand
 from flaskblog.models import db
+from flask_migrate import Migrate, MigrateCommand
 
 app = create_app()
 manager = Manager(app)

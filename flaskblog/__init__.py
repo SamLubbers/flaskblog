@@ -49,7 +49,9 @@ def register_jinja(app):
     @app.context_processor
     def filters():
         from .utils import filters
-        return dict(trim=filters.trim, format_date=filters.format_date)
+        return dict(trim=filters.trim,
+                    format_date=filters.format_date,
+                    getattr=getattr)
 
 
 def register_error_handlers(app):

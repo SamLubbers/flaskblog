@@ -13,16 +13,16 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>id</th>
-                        <th>
-                            {% if model == 'blog' %}title{% else %}name{% endif %}
-                        </th>
+                        {% for attribute in attributes %}
+                            <th>{{attribute}}</th>
+                        {% endfor %}
                     </tr>
                     </thead>
                     {% for row in data%}
                     <tr>
-                        <td>{{row[0]}}</td>
-                        <td>{{row[1]}}</td>
+                        {% for attribute in attributes %}
+                            <td>{{getattr(row, attribute)}}</td>
+                        {% endfor %}
                     </tr>
                     {% endfor %}
                 </table>
