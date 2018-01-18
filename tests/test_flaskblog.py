@@ -52,6 +52,15 @@ class RoutesTestCase(unittest.TestCase):
         with self.app.test_request_context('/'):
             assert request.path == '/'
 
+class UrlTestCase(unittest.TestCase):
+    def setUp(self):
+        self.app = flaskblog.create_app()
+        self.app.testing = True
+
+    def test_index(self):
+        with self.app.test_request_context():
+            assert url_for('index.index') == '/'
+
 
 if __name__ == '__main__':
     unittest.main()
