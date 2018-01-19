@@ -64,17 +64,19 @@ class TempalatesTestCase(unittest.TestCase):
             assert template.name == 'index/index.html'
 
 
-class RoutesTestCase(unittest.TestCase):
+class ViewsTestCase(unittest.TestCase):
+    """test that all routes return code 200"""
     def setUp(self):
         self.app = flaskblog.create_app()
         self.app.testing = True
 
-    def test_index_route(self):
-        with self.app.test_request_context('/'):
-            assert request.path == '/'
+    def test_index(self):
+        with self.app.test_client() as client:
+            res = client.get('/')
+            assert res.status_code == 200
 
 
-class UrlTestCase(unittest.TestCase):
+class UrlforTestCase(unittest.TestCase):
     def setUp(self):
         self.app = flaskblog.create_app()
         self.app.testing = True
