@@ -1,8 +1,13 @@
-from flask import template_rendered, request, url_for, current_app
+from flask import template_rendered, request, url_for, current_app, g
 from contextlib import contextmanager
 import flaskblog
 import unittest
 import logging
+from datetime import datetime
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 
 @contextmanager
 def captured_templates(app):
@@ -19,7 +24,7 @@ def captured_templates(app):
         template_rendered.disconnect(record, app)
 
 
-class AppTestCase(unittest.TestCase):
+class AppContextTestCase(unittest.TestCase):
     def setUp(self):
         self.app = flaskblog.create_app()
         self.app.testing = True
@@ -28,29 +33,46 @@ class AppTestCase(unittest.TestCase):
         with self.app.app_context():
             assert current_app == self.app
 
+
+class RequestContextTestCase(unittest.TestCase):
+    def setUp(self):
+        self.app = flaskblog.create_app()
+        self.app.testing = True
+
+    def test_g_now(self):
+        """we populate g.now with curret datetime for each request
+        this tests g.now is available within a request context
+        """
+        with self.app.test_client() as client:
+            client.get('/')
+            g_now = getattr(g, 'now', None)
+            assert isinstance(g_now, datetime)
+
+
 class TempalatesTestCase(unittest.TestCase):
     def setUp(self):
         self.app = flaskblog.create_app()
         self.app.testing = True
         self.test_client = self.app.test_client()
 
-    def test_index_template(self): # text the right is loaded
+    def test_index_template(self):
+        """test the right template is loaded"""
         with captured_templates(self.app) as templates:
             rv = self.test_client.get('/')
-            assert rv.status_code == 200
             assert len(templates) == 1
             template, context = templates[0]
             assert template.name == 'index/index.html'
+
 
 class RoutesTestCase(unittest.TestCase):
     def setUp(self):
         self.app = flaskblog.create_app()
         self.app.testing = True
-        self.test_client = self.app.test_client()
 
     def test_index_route(self):
         with self.app.test_request_context('/'):
             assert request.path == '/'
+
 
 class UrlTestCase(unittest.TestCase):
     def setUp(self):
@@ -64,4 +86,3 @@ class UrlTestCase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

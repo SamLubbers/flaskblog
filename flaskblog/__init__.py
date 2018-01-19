@@ -1,4 +1,4 @@
-from flask import Flask, render_template, g
+from flask import Flask, render_template, g, current_app
 from config import load_config
 from datetime import datetime
 import os
@@ -18,7 +18,6 @@ def create_app():
     register_jinja(app)
     register_views(app)
     register_prerequest_handlers(app)
-    register_teardowns(app)
     register_error_handlers(app)
 
     return app
@@ -94,14 +93,6 @@ def register_prerequest_handlers(app):
     @app.before_request
     def set_now():
         g.now = datetime.now()
-
-
-def register_teardowns(app):
-    @app.teardown_request
-    def print_end(exception=None):
-        if g.now is not None:
-            g.now = None
-
 
 def _import_submodules_from_package(package):
     from pkgutil import iter_modules
