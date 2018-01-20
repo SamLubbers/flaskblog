@@ -33,8 +33,7 @@ body{
 }
 .blog-title{
     font-size:26px;
-    font-weight: 600;
-
+    font-weight: 900;
 }
 
 .blog-container:hover{
@@ -66,4 +65,11 @@ a{
 }
 .navbar-brand:hover{
     color: #01FF70;
+}
+.minimal{
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 1px solid #CCC;
+    
 }

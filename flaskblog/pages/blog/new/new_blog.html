@@ -6,28 +6,32 @@
 {% block content %}
 <div class="row">
     <div class="col-md-8 offset-md-2 col-12">
-            <form method=post>
-                <div class="form-group">
-                    {{ form.blog_title(class_="form-control blog-title") }}
-                    {% if form.blog_title.errors %}
-                    {% for error in form.blog_title.errors %}
-                    <p class="form-error">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.blog_text(rows="18", class_="form-control blog-text") }}
-                    {% if form.blog_text.errors %}
-                    {% for error in form.blog_text.errors %}
-                    <p class="form-error">{{ error }}</p>
-                    {% endfor %}
-                    {% endif %}
+        <form method=post>
+            <div class="form-group">
+                {{ form.blog_title(class_="form-control blog-title minimal") }}
+                {% if form.blog_title.errors %}
+                {% for error in form.blog_title.errors %}
+                <p class="form-error">{{ error }}</p>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.blog_text(rows="18", class_="form-control blog-text minimal") }}
+                {% if form.blog_text.errors %}
+                {% for error in form.blog_text.errors %}
+                <p class="form-error">{{ error }}</p>
+                {% endfor %}
+                {% endif %}
 
 
-                </div>
+            </div>
+            <div>
                 <button class="btn btn-primary" type="submit">Post</button>
-            </form>
-        </div>
+                <a type="button" class="btn btn-light" href="{{url_for('index.index')}}">Cancel</a>
+            </div>
+        </form>
+
     </div>
+</div>
 </div>
 {% endblock %}
