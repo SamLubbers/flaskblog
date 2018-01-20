@@ -1,8 +1,7 @@
-from flask import Flask, render_template, g, current_app
-from config import load_config
-from datetime import datetime
 import os
 import jinja2
+from config import load_config
+from flask import Flask, render_template
 
 
 def create_app():
@@ -90,9 +89,9 @@ def register_error_handlers(app):
 
 
 def register_prerequest_handlers(app):
-    @app.before_request
-    def set_now():
-        g.now = datetime.now()
+    from .utils.prerequests import set_now
+    app.before_request(set_now)
+
 
 def _import_submodules_from_package(package):
     from pkgutil import iter_modules
