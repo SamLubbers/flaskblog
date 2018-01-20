@@ -2,8 +2,8 @@
 
 {% block title %}flaskblog entries{% endblock %}
 {% block content %}
-    {% if entries %}
-        {% for blog in entries %}
+    {% if blogs %}
+        {% for blog in blogs %}
             <div class="row">
                 <div class="col-md-8 offset-md-2 col-12 blog-container" onclick="location.href='{{url_for('blog.view_blog', blog_id=blog.id )}}';">
                     <h3 class="blog-title topspace"><strong>{{blog.title}}</strong></h3>

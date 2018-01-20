@@ -1,11 +1,11 @@
-from flask.blueprints import Blueprint
-from flaskblog.models import Blog
 from flask import render_template
+from flask.blueprints import Blueprint
+from flaskblog import services
 
 bp = Blueprint('index', __name__)
 
 @bp.route('/')
 def index():
-    entries = Blog.query.order_by(Blog.id).all()
-
-    return render_template('index/index.html', entries=entries)
+    blogs = services.get_all_blogs()
+    print(blogs)
+    return render_template('index/index.html', blogs=blogs)
