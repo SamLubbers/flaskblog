@@ -12,3 +12,6 @@ class Config(object):
     # SQLAlchemy config
     SQLALCHEMY_DATABASE_URI = "postgresql://localhost/flaskblog"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # caching
+    CACHE_TIMEOUT = 60 * 5 # default caching timeout of ten minutes
