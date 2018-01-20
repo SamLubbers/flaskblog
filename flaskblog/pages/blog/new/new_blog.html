@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}new blog{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2 col-12">
+        <div class="jumbotron jumbominimal">
+            <h2 class="title-margin">share a new blog</h2>
+            <form method="post" class="needs-validation" novalidate>
+                <div class="form-group has-warning">
+                    <input class="form-control blog-title" type="text" name="title"
+                           placeholder="title" required>
+                    <div class="invalid-feedback">You should provide a great name for your blog!</div>
+                </div>
+                <div class="form-group has-warning">
+                    <textarea class="form-control blog-text" name="text" placeholder="blog" rows="10" required></textarea>
+                    <div class="invalid-feedback">You cannot post a blog, without writing a blog</div>
+                </div>
+                <button class="btn btn-primary" type="submit" >Post</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+{% endblock %}

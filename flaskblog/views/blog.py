@@ -11,10 +11,10 @@ def new_blog():
         services.insert_blog(blog_title=request.form.get('title'),
                              blog_text=request.form.get('text'))
         return redirect(url_for('index.index'))
-    return render_template('blog/new_blog.html')
+    return render_template('blog/new/new_blog.html')
 
 
 @bp.route('/<int:blog_id>')
 def view_blog(blog_id):
     blog = services.get_blog(blog_id)
-    return render_template('blog/view_blog.html', blog=blog)
+    return render_template('blog/view/view_blog.html', blog=blog)
