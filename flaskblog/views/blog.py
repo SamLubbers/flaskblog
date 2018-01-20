@@ -1,19 +1,18 @@
 from flask import render_template, request, redirect, url_for, flash
 from flask.blueprints import Blueprint
 from flaskblog import services
-
+from flaskblog.forms import NewBlogForm
 bp = Blueprint('blog', __name__, url_prefix='/blog')
 
 
 @bp.route('/new', methods=['GET', 'POST'])
 def new_blog():
-    if request.method == 'POST':
-        blog_title = request.form.get('title')
-        services.insert_blog(blog_title=blog_title,
-                             blog_text=request.form.get('text'))
-        flash(f'your blog "{blog_title}" was succesfully posted','success')
+    form = NewBlogForm(request.form)
+    if request.method == 'POST' and form.validate():
+        services.insert_blog(blog_title=form.blog_title.data, blog_text=form.blog_text.data)
+        flash(f'your blog "{form.blog_title.data}" was succesfully posted','success')
         return redirect(url_for('index.index'))
-    return render_template('blog/new/new_blog.html')
+    return render_template('blog/new/new_blog.html', form=form)
 
 
 @bp.route('/<int:blog_id>')

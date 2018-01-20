@@ -1,11 +1,11 @@
+body{
+    font-family: sans-serif;
+    color: #111111;
+}
 #navtitle{
     font-size: 30px;
 }
-.blog-text{
-    font-family: sans-serif;
-    color:#222529;
-    font-size:20px;
-}
+
 .navbar-login{
     font-size: 20px;
     color:white;
@@ -51,4 +51,7 @@
 
 .small{
     color: #CCC;
+}
+.form-error{
+    color: red;
 }

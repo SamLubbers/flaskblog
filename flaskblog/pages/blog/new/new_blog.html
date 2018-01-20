@@ -6,20 +6,28 @@
     <div class="col-md-8 offset-md-2 col-12">
         <div class="jumbotron jumbominimal">
             <h2 class="title-margin">share a new blog</h2>
-            <form method="post" class="needs-validation" novalidate>
-                <div class="form-group has-warning">
-                    <input class="form-control blog-title" type="text" name="title"
-                           placeholder="title" required>
-                    <div class="invalid-feedback">You should provide a great name for your blog!</div>
+            <form method=post>
+                <div class="form-group">
+                    {{ form.blog_title(class_="form-control blog-title") }}
+                    {% if form.blog_title.errors %}
+                    {% for error in form.blog_title.errors %}
+                    <p class="form-error">{{ error }}</p>
+                    {% endfor %}
+                    {% endif %}
                 </div>
-                <div class="form-group has-warning">
-                    <textarea class="form-control blog-text" name="text" placeholder="blog" rows="10" required></textarea>
-                    <div class="invalid-feedback">You cannot post a blog, without writing a blog</div>
+                <div class="form-group">
+                    {{ form.blog_text(rows="15", class_="form-control") }}
+                    {% if form.blog_text.errors %}
+                    {% for error in form.blog_text.errors %}
+                    <p class="form-error">{{ error }}</p>
+                    {% endfor %}
+                    {% endif %}
+
+
                 </div>
-                <button class="btn btn-primary" type="submit" >Post</button>
+                <button class="btn btn-primary" type="submit">Post</button>
             </form>
         </div>
     </div>
 </div>
 {% endblock %}
-{% block page_js %}<script src="/pages/blog/new/validate_blog.js"></script>{% endblock %}
