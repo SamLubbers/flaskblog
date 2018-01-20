@@ -15,10 +15,9 @@ def get_blog(blog_id):
 
 
 def insert_blog(blog_title, blog_text):
-    if blog_title and blog_text:
-        blog = Blog(title=blog_title, text=blog_text)
-        db.session.add(blog)
-        db.session.commit()
+    blog = Blog(title=blog_title, text=blog_text)
+    db.session.add(blog)
+    db.session.commit()
 
 
 def get_all_blogs():

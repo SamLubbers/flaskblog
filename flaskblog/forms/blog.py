@@ -4,7 +4,9 @@ from wtforms.widgets import TextArea
 
 class NewBlogForm(Form):
     blog_title = StringField('title',
-                             [validators.DataRequired(message='You should provide a great title for your blog')])
+                             [validators.DataRequired(message='Did you forget the title?')],
+                             render_kw={"placeholder": 'Title'})
     blog_text = StringField('blog',
-                            [validators.DataRequired(message='You must write something before you can post your blog')],
-                            widget=TextArea())
+                            [validators.DataRequired(message='Did you forget to write your blog post?')],
+                            widget=TextArea(),
+                            render_kw={"placeholder": 'Write your story'})

@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}new blog{% endblock %}
+<!--hide new blog button when writing a blog-->
+{% block newblog%}{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-8 offset-md-2 col-12">
-        <div class="jumbotron jumbominimal">
-            <h2 class="title-margin">share a new blog</h2>
             <form method=post>
                 <div class="form-group">
                     {{ form.blog_title(class_="form-control blog-title") }}
@@ -16,7 +16,7 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    {{ form.blog_text(rows="15", class_="form-control") }}
+                    {{ form.blog_text(rows="18", class_="form-control blog-text") }}
                     {% if form.blog_text.errors %}
                     {% for error in form.blog_text.errors %}
                     <p class="form-error">{{ error }}</p>

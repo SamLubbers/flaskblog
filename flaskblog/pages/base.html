@@ -15,7 +15,14 @@
     {% endblock %}
 </head>
 <body>
-    {% include '_navbar.html' %}
+    <nav class="navbar justify-content-between">
+    <a class="navbar-brand" id="navtitle" href="{{url_for('index.index')}}"> flaskblog <i class="far fa-file"></i></a>
+    <form class="form-inline">
+        {% block newblog %}
+        <a class="btn btn-primary" role="button" href="{{url_for('blog.new_blog')}}">New blog</a>
+        {% endblock %}
+    </form>
+</nav>
 
     <div class="container margin-top">
         {% include '_flash_messages.html' %}
