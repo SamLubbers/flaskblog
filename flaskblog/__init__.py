@@ -2,7 +2,7 @@ import os
 import jinja2
 from config import load_config
 from flask import Flask, render_template
-
+from werkzeug.wsgi import SharedDataMiddleware
 
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
@@ -11,6 +11,12 @@ def create_app():
     config = load_config()
     app.config.from_object(config)
     app.config.from_envvar('CONFIG', silent=True)  # override default config with production config in instance folder
+
+    # Serve static files
+    if app.debug or app.testing:
+        app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
+            '/pages': os.path.join(app.config.get('PROJECT_PATH'), 'flaskblog/pages')
+        })
 
     # register components
     register_db(app)
