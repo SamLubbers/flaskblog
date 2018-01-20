@@ -2,6 +2,7 @@ from flask.blueprints import Blueprint
 from flaskblog.models import db
 from flaskblog.models import Blog
 from flask import render_template, request, redirect, url_for
+from flaskblog import services
 
 bp = Blueprint('blog', __name__, url_prefix='/blog')
 
@@ -19,5 +20,6 @@ def new_blog():
 
 @bp.route('/<int:blog_id>')
 def view_blog(blog_id):
-    blog = Blog.query.filter_by(id=blog_id).one()
+    blog = services.get_blog(blog_id)
     return render_template('blog/view_blog.html',blog=blog)
+

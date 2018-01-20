@@ -1,8 +1,6 @@
-from flask.views import View
 from flask import render_template, Blueprint
+from flask.views import View
 from flaskblog.models import Blog, Tag, User
-from sqlalchemy.orm import joinedload
-from sqlalchemy import inspect
 
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 
