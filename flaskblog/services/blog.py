@@ -22,8 +22,4 @@ def insert_blog(blog_title, blog_text):
 
 
 def get_all_blogs():
-    blogs = cache.get('all_blogs')
-    if not blogs:
-        blogs = Blog.query.order_by(Blog.id).all()
-        cache.set('all_blogs', blogs, timeout=current_app.config['CACHE_TIMEOUT'])
-    return blogs
+    return Blog.query.order_by(Blog.pubdate.desc()).all()
