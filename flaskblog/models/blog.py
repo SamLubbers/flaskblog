@@ -1,6 +1,7 @@
 from datetime import datetime
 from ._db import db
 from ._relationship_tables import blog_tag
+from flaskblog.utils.serializing import dump_datetime
 
 
 class Blog(db.Model):
@@ -16,6 +17,30 @@ class Blog(db.Model):
 
     def __repr__(self):
         return f"Blog({self.title})"
+
+    def author_name(self):
+        print('PROPERTY CALLED')
+        if self.author is None:
+            return None
+        return self.author.name
+
+    def tag_names(self):
+        tags = [tag.name for tag in self.tags if tag]
+        if not tags:
+            return None
+        return tags
+
+    @property
+    def serialize(self):
+        """Return object data in a format easily serializable to json"""
+        return {
+            'id': self.id,
+            'title': self.title,
+            'text': self.text,
+            'pubdate': dump_datetime(self.pubdate),
+            'tags': self.tag_names(),
+            'author': self.author_name()
+        }
 
 
 class Tag(db.Model):
