@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+{% block newblog%}{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2 col-12">
+        {% from "formhelpers.html" import render_form %}
+        <form method=post>
+            {{ render_form() }}
+
+            <div>
+                <button class="btn btn-primary" type="submit">Register</button>
+                <a type="button" class="btn btn-light" href="{{url_for('index.index')}}">Cancel</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -84,7 +84,3 @@ class UrlforTestCase(unittest.TestCase):
     def test_index(self):
         with self.app.test_request_context():
             assert url_for('index.index') == '/'
-
-
-if __name__ == '__main__':
-    unittest.main()

@@ -60,3 +60,11 @@ python manage.py db upgrade
 ```
 
 It is recommended to review the migrations file created at `migrations/versions` after running `db migrate` to make sure that the right migrations have been created and make any changes that are necessary. Once the migrations are in the correct state you can run `db upgrade` to apply the migrations to the databse. An example when this may be necessary is when you rename tables or columns, in which case flask-migrate will not notice the changes.
+
+## testing
+
+run unit tests with the following command
+
+```bash
+python manage.py test
+```
