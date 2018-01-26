@@ -14,12 +14,5 @@ manager.add_command('db', MigrateCommand)
 def run():
     app.run()
 
-@manager.command
-def test():
-    import unittest
-
-    testsuite = unittest.TestLoader().discover(start_dir='tests/')
-    unittest.TextTestRunner(verbosity=1).run(testsuite)
-
 if __name__ == '__main__':
     manager.run()
