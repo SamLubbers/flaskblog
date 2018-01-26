@@ -23,6 +23,6 @@ def client_get_request(url):
 
             template_rendered.disconnect(record, self.app) # disconnect from signal listening
 
-            test_method(self, response, template, context) # pass all data to the test function
+            test_method(self, response, template.name, context) # pass all data to the test function
         return wrapper
     return decorator

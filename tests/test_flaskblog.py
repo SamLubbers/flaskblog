@@ -1,11 +1,10 @@
 import logging
-import unittest
 from datetime import datetime
 
 from flask import current_app, g
 
-from flaskblog import create_app
 from tests.layouts import DefaultTestCase, RequestTestCase
+from tests.helpers import client_get_request
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -37,14 +36,10 @@ class RequestContextTestCase(RequestTestCase):
             g_now = getattr(g, 'now', None)
             assert isinstance(g_now, datetime)
 
-# class ViewsTestCase(unittest.TestCase):
-#     """test that all routes return code 200 and render the correct template"""
-#
-#     def setUp(self):
-#         self.app = create_app()
-#         self.app.testing = True
-#
-#     def test_index(self):
-#         with self.app.test_client() as client:
-#             res = client.get('/')
-#             assert res.status_code == 200
+class ViewsTestCase(RequestTestCase):
+    """test that all routes return code 200 and render the correct template"""
+
+    @client_get_request('/')
+    def test_index(self, response, template, context):
+        self.success(response.status_code)
+        self.assertEquals(template, 'index/index.html')
