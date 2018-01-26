@@ -1,32 +1,18 @@
-from flask import template_rendered, request, url_for, current_app, g
-from contextlib import contextmanager
-import flaskblog
-import unittest
 import logging
+import unittest
 from datetime import datetime
+
+from flask import url_for, current_app, g
+
+from flaskblog import create_app
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
-@contextmanager
-def captured_templates(app):
-    """use signals to test the correct template is loaded"""
-    recorded = []
-
-    def record(sender, template, context, **extra):
-        recorded.append((template, context))
-
-    template_rendered.connect(record, app)
-    try:
-        yield recorded
-    finally:
-        template_rendered.disconnect(record, app)
-
-
 class AppContextTestCase(unittest.TestCase):
     def setUp(self):
-        self.app = flaskblog.create_app()
+        self.app = create_app()
         self.app.testing = True
 
     def test_current_app(self):
@@ -36,7 +22,7 @@ class AppContextTestCase(unittest.TestCase):
 
 class RequestContextTestCase(unittest.TestCase):
     def setUp(self):
-        self.app = flaskblog.create_app()
+        self.app = create_app()
         self.app.testing = True
 
     def test_g_now(self):
@@ -51,7 +37,7 @@ class RequestContextTestCase(unittest.TestCase):
 
 class TempalatesTestCase(unittest.TestCase):
     def setUp(self):
-        self.app = flaskblog.create_app()
+        self.app = create_app()
         self.app.testing = True
         self.test_client = self.app.test_client()
 
@@ -66,8 +52,9 @@ class TempalatesTestCase(unittest.TestCase):
 
 class ViewsTestCase(unittest.TestCase):
     """test that all routes return code 200"""
+
     def setUp(self):
-        self.app = flaskblog.create_app()
+        self.app = create_app()
         self.app.testing = True
 
     def test_index(self):
@@ -78,7 +65,7 @@ class ViewsTestCase(unittest.TestCase):
 
 class UrlforTestCase(unittest.TestCase):
     def setUp(self):
-        self.app = flaskblog.create_app()
+        self.app = create_app()
         self.app.testing = True
 
     def test_index(self):
