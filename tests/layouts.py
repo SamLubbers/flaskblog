@@ -17,7 +17,7 @@ class DefaultTestCase(unittest.TestCase):
 
     def setUp(self):
         # app
-        os.environ['APP_CONFIG_FILE'] = 'config.test'
+        os.environ['MODE'] = 'TESTING'
         self.app = create_app()
 
         # db
