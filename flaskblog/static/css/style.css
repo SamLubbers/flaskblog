@@ -73,3 +73,7 @@ a{
     border-bottom: 1px solid #CCC;
     
 }
+.same_line{
+    display: inline-block;
+    margin: 0px 5px;
+}
