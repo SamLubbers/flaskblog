@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask_login import logout_user, login_required
 
 from flaskblog.forms import SignUpForm, SignInForm
 from flaskblog.services.user import create_user, signin_user
-from flask_login import logout_user
 
 bp = Blueprint('user', __name__)
 
@@ -35,3 +35,11 @@ def signin():
             return redirect(url_for('user.signin'))
 
     return render_template('user/signin.html', form=form)
+
+
+@bp.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('you have succesfully logged out')
+    return redirect(url_for('index.index'))
