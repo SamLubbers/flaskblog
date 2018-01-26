@@ -1,5 +1,5 @@
 """services module for interacting with the Blog model"""
-from flaskblog.models import Blog, db
+from flaskblog.models import Blog, db, User
 from werkzeug.contrib.cache import SimpleCache
 from flask import current_app
 
@@ -14,8 +14,9 @@ def get_blog(blog_id):
     return blog
 
 
-def insert_blog(blog_title, blog_text):
+def insert_blog(blog_title, blog_text, username):
     blog = Blog(title=blog_title, text=blog_text)
+    blog.author = User.query.filter_by(username=username).first()
     db.session.add(blog)
     db.session.commit()
 

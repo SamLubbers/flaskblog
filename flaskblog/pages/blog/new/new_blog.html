@@ -22,9 +22,8 @@
                 <p class="form-error">{{ error }}</p>
                 {% endfor %}
                 {% endif %}
-
-
             </div>
+            <input type="hidden" name="current_user" value="{{ current_user.username }}">
             <div>
                 <button class="btn btn-primary" type="submit">Post</button>
                 <a type="button" class="btn btn-light" href="{{url_for('index.index')}}">Cancel</a>
