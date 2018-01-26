@@ -31,3 +31,22 @@ class DefaultTestCase(unittest.TestCase):
     ##############################
     #### setup helper methods ####
     ##############################
+
+class RequestTestCase(DefaultTestCase):
+    """test case for making client requests to our application"""
+
+    ############################
+    #### setup and teardown ####
+    ############################
+
+    def setUp(self):
+        super().setUp()  # load DefaultTestCase settings
+        self.client = self.app.test_client()  #  create test client that can be used to make requests
+
+    #############################
+    #### test helper methods ####
+    #############################
+
+    def success(self, status_code):
+        """test HTTP request is successful"""
+        self.assertEqual(status_code, 200)
