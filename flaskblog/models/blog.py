@@ -19,10 +19,9 @@ class Blog(db.Model):
         return f"Blog({self.title})"
 
     def author_name(self):
-        print('PROPERTY CALLED')
         if self.author is None:
             return None
-        return self.author.name
+        return self.author.username
 
     def tag_names(self):
         tags = [tag.name for tag in self.tags if tag]

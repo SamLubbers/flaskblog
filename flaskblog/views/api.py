@@ -1,15 +1,16 @@
+"""RESTful API for obtaining blogs"""
 from flask import jsonify, abort, make_response
 from flask.blueprints import Blueprint
 from sqlalchemy.orm.exc import NoResultFound
 
-from flaskblog.services import get_all_blogs, get_blog
+from flaskblog.services import get_blog, get_all_blogs_with_uri
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
 
 @bp.route('/allblogs')
 def allblogs():
-    all_blogs = [blog.serialize for blog in get_all_blogs()]
+    all_blogs = get_all_blogs_with_uri()
     if not all_blogs:
         abort(404)
     else:

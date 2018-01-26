@@ -1,5 +1,6 @@
 """services module for interacting with the Blog model"""
 from flaskblog.models import Blog, db, User
+from flaskblog.utils.api import make_public_blog
 from werkzeug.contrib.cache import SimpleCache
 from flask import current_app
 
@@ -23,3 +24,9 @@ def insert_blog(blog_title, blog_text, username):
 
 def get_all_blogs():
     return Blog.query.order_by(Blog.pubdate.desc()).all()
+
+def get_all_blogs_with_uri():
+    """all blogs data + blog URI"""
+    blogs = [blog.serialize for blog in get_all_blogs()]
+    blogs = [make_public_blog(blog) for blog in blogs]
+    return blogs
