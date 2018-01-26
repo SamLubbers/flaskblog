@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block newblog%}{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2 col-12">
+        {% from "formhelpers.html" import render_form %}
+        <form method=post>
+            {{ render_form(form.username) }}
+            {{ render_form(form.password) }}
+            {{ render_form(form.confirm) }}
+
+            <div>
+                <button class="btn btn-primary" type="submit">Sign Up</button>
+                <p class="same_line">already have an account? <a href="{{ url_for('user.signin') }}">Sign In</a></p>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

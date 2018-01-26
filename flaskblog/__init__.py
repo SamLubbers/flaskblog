@@ -24,6 +24,7 @@ def create_app():
     register_views(app)
     register_prerequest_handlers(app)
     register_error_handlers(app)
+    register_login(app)
 
     return app
 
@@ -98,6 +99,10 @@ def register_prerequest_handlers(app):
     from .utils.prerequests import set_now
     app.before_request(set_now)
 
+
+def register_login(app):
+    from flaskblog.utils.login import login_manager
+    login_manager.init_app(app)
 
 def _import_submodules_from_package(package):
     from pkgutil import iter_modules
