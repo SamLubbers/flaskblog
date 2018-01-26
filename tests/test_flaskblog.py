@@ -43,3 +43,13 @@ class ViewsTestCase(RequestTestCase):
     def test_index(self, response, template, context):
         self.success(response.status_code)
         self.assertEquals(template, 'index/index.html')
+
+    @client_get_request('/signin')
+    def test_signin(self, response, template, context):
+        self.success(response.status_code)
+        self.assertEquals(template, 'user/signin.html')
+
+    @client_get_request('/signup')
+    def test_signup(self, response, template, context):
+        self.success(response.status_code)
+        self.assertEquals(template, 'user/signup.html')
