@@ -41,5 +41,5 @@ def signin():
 @login_required
 def logout():
     logout_user()
-    flash('you have succesfully logged out')
+    flash('you have succesfully logged out', category='success')
     return redirect(url_for('index.index'))
