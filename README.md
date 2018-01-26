@@ -66,5 +66,5 @@ It is recommended to review the migrations file created at `migrations/versions`
 run unit tests with the following command
 
 ```bash
-python manage.py test
+python run_tests.py
 ```

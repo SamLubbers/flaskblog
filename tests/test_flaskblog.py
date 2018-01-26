@@ -1,13 +1,11 @@
-import os
 import logging
 import unittest
 from datetime import datetime
 
-from flask import url_for, current_app, g
+from flask import current_app, g
 
-from tests.layouts import DefaultTestCase
 from flaskblog import create_app
-
+from tests.layouts import DefaultTestCase, RequestTestCase
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -28,20 +26,17 @@ class AppTestCase(DefaultTestCase):
         self.assertFalse(self.app.debug)
 
 
-# class RequestContextTestCase(unittest.TestCase):
-#     def setUp(self):
-#         self.app = create_app()
-#         self.app.testing = True
-#
-#     def test_g_now(self):
-#         """we populate g.now with curret datetime for each request
-#         this tests g.now is available within a request context
-#         """
-#         with self.app.test_client() as client:
-#             client.get('/')
-#             g_now = getattr(g, 'now', None)
-#             assert isinstance(g_now, datetime)
-#
+class RequestContextTestCase(RequestTestCase):
+
+    def test_g_now(self):
+        """we populate g.now with curret datetime for each request
+        this tests g.now is available within a request context
+        """
+        with self.client:
+            self.client.get('/')
+            g_now = getattr(g, 'now', None)
+            assert isinstance(g_now, datetime)
+
 # class ViewsTestCase(unittest.TestCase):
 #     """test that all routes return code 200 and render the correct template"""
 #
