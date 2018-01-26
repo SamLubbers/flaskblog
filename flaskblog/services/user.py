@@ -12,3 +12,15 @@ def create_user(username, password):
     db.session.commit()
     login_user(user)
     return True
+
+def signin_user(username, password):
+    # check that user does exist in db
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return False
+    # check that passwords match
+    if user.password != password:
+        return False
+    # login user
+    login_user(user)
+    return True

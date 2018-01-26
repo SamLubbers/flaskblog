@@ -21,4 +21,4 @@ class User(db.Model):
         return False
 
     def get_id(self):
-        return str(self.email)
+        return str(self.username)

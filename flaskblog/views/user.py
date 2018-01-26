@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 
 from flaskblog.forms import SignUpForm, SignInForm
-from flaskblog.services.user import create_user
+from flaskblog.services.user import create_user, signin_user
+from flask_login import logout_user
 
 bp = Blueprint('user', __name__)
 
@@ -25,7 +26,12 @@ def signup():
 def signin():
     form = SignInForm(request.form)
     if request.method == 'POST' and form.validate():
-        # TODO call to login user function in services
-        return redirect(url_for('index.index'))
+        if signin_user(form.username.data, form.password.data):
+            flash('you have succesfully logged in',
+                  category='success')
+            return redirect(url_for('index.index'))
+        else:
+            flash('incorrect username and password combination', category='danger')
+            return redirect(url_for('user.signin'))
 
     return render_template('user/signin.html', form=form)
