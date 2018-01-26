@@ -2,10 +2,13 @@ from flask import render_template, request, redirect, url_for, flash
 from flask.blueprints import Blueprint
 from flaskblog import services
 from flaskblog.forms import NewBlogForm
+from flask_login import login_required
+
 bp = Blueprint('blog', __name__, url_prefix='/blog')
 
 
 @bp.route('/new', methods=['GET', 'POST'])
+@login_required
 def new_blog():
     form = NewBlogForm(request.form)
     if request.method == 'POST' and form.validate():
