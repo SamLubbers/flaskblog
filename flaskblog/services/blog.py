@@ -3,6 +3,7 @@ from flaskblog.models import Blog, db, User
 from flaskblog.utils.api import make_public_blog
 from werkzeug.contrib.cache import SimpleCache
 from flask import current_app
+from sqlalchemy.orm import joinedload
 
 cache = SimpleCache()
 
@@ -10,7 +11,11 @@ cache = SimpleCache()
 def get_blog(blog_id):
     blog = cache.get(blog_id)
     if blog is None:
-        blog = Blog.query.filter_by(id=blog_id).one()
+        # joined load is necessary as the data is cached
+        blog = Blog.query.filter_by(id=blog_id)\
+            .options(joinedload(Blog.tags)) \
+            .options(joinedload(Blog.author))\
+            .one()
         cache.set(blog_id, blog, timeout=current_app.config['CACHE_TIMEOUT'])
     return blog
 
